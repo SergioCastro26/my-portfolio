@@ -24,17 +24,17 @@ export default function Header({}: Props) {
         {/* Social Icons */}
         <SocialIcon
           url="https://www.linkedin.com/in/sergio-luis-castro-barrientos-16197b11a/"
-          fgColor="gray"
+          fgColor="#fe6f61"
           bgColor="transparent"
         />
         <SocialIcon
           url="https://github.com/SergioCastro26"
-          fgColor="gray"
+          fgColor="#fe6f61"
           bgColor="transparent"
         />
         <SocialIcon
           url="https://x.com/"
-          fgColor="gray"
+          fgColor="#fe6f61"
           bgColor="transparent"
         />
       </motion.div>
@@ -56,11 +56,11 @@ export default function Header({}: Props) {
         <SocialIcon
           className="cursor-pointer"
           network="email"
-          fgColor="gray"
+          fgColor="#fe6f61"
           bgColor="transparent"
         />
 
-        <p className="uppercase hidden md:inline-flex text-sm text-gray-400">
+        <p className="uppercase hidden md:inline-flex text-sm text-[#fe6f61]">
           Get In Touch
         </p>
       </motion.div>

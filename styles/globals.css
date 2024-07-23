@@ -30,4 +30,11 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+@layer components {
+  .heroButton {
+    @apply px-6 py-2 border border-[#34495e] rounded-full uppercase text-sm tracking-widest font-bold
+    text-[#6b7b8a] transition-all hover:border-[#fe6f61]/40 hover:text-[#fe6f61]/40
+  }
+}
 }
