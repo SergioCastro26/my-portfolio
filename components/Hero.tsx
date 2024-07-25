@@ -10,8 +10,10 @@ type Props = {}
 export default function Hero({}: Props) {
   const [text, count] = useTypewriter({
     words: [
-      "Develop",
-      "Design"
+      "Create Amazing Apps",
+      "Build Intuitive UI",
+      "Solve Complex Problems",
+      "Innovate Every Day"
     ],
     loop: true,
     delaySpeed: 2000,
@@ -25,7 +27,7 @@ export default function Hero({}: Props) {
         <h2 className="text-sm uppercase text-[#6b7b8a] pb-2 tracking-[12px] font-bold">Full Stack Developer</h2>
         <h1 className="text-5xl lg:text-6xl font-semibold px-20">
           <span className="mr-3">
-            I like to {' '}
+            I love to {' '}
             <span className='text-[#fe6f61]'>
               {text}
             </span>
