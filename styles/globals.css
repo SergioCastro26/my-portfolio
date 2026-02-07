@@ -36,5 +36,22 @@ body {
     @apply px-6 py-2 border border-[#34495e] rounded-full uppercase text-sm tracking-widest font-bold
     text-[#6b7b8a] transition-all hover:border-[#fe6f61]/40 hover:text-[#fe6f61]/40
   }
+
+  .contactInput {
+    @apply outline-none bg-slate-400/10 rounded-sm border-b px-6 py-4 border-[#242424] text-gray-500 placeholder-gray-500 transition-all focus:border-[#A4805B]/40 focus:text-[#A4805B]/40 hover:border-[#A4805B]/40
+  }
 }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-400%);
+  }
+}
+
+.animate-slide {
+  animation: slide 8s steps(4) infinite;
 }

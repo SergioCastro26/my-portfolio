@@ -1,0 +1,259 @@
+[
+  {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "role",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "heroImage",
+        "type": "image",
+        "title": "Image"
+      },
+      {
+        "name": "backgroundInformation",
+        "type": "string",
+        "title": "BackgroundInformation"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "profilePicture",
+        "type": "image",
+        "title": "ProfilePicture"
+      },
+      {
+        "name": "phoneNumer",
+        "type": "string",
+        "title": "PhoneNumer"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "social"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to social"
+          }
+        ],
+        "name": "socials",
+        "type": "array"
+      }
+    ],
+    "name": "pageInfo",
+    "type": "document",
+    "title": "PageInfo"
+  },
+  {
+    "fields": [
+      {
+        "description": "Title of the skill",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Progress of skill from 0 to 100%",
+        "name": "progress",
+        "type": "number"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image"
+      }
+    ],
+    "name": "skill",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "description": "Title of the project",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "name": "summary",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "skill"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to skill"
+          }
+        ],
+        "name": "technologies",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "linkToBuild",
+        "type": "url",
+        "title": "LinkToBuild"
+      }
+    ],
+    "name": "project",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "jobTitle",
+        "type": "string",
+        "title": "JobTitle"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "companyImage",
+        "type": "image",
+        "title": "CompanyImage"
+      },
+      {
+        "name": "company",
+        "type": "text"
+      },
+      {
+        "name": "dateStarted",
+        "type": "date"
+      },
+      {
+        "name": "dateEnded",
+        "type": "date"
+      },
+      {
+        "name": "isCurrentlyWorkingHere",
+        "type": "boolean",
+        "title": "IsCurrentlyWorkingHere"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "skill"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to skill"
+          }
+        ],
+        "name": "technologies",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "points",
+        "type": "array"
+      }
+    ],
+    "name": "experience",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "description": "Platform for social media",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "url",
+        "type": "url"
+      }
+    ],
+    "name": "social",
+    "type": "document"
+  }
+]

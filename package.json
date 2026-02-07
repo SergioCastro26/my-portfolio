@@ -9,25 +9,30 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sanity/image-url": "^1.0.2",
-    "@sanity/vision": "^3.52.2",
+    "@heroicons/react": "^2.2.0",
+    "@sanity/icons": "^3.7.4",
+    "@sanity/image-url": "^2.0.3",
+    "@sanity/vision": "^4.22.0",
     "framer-motion": "^11.3.8",
     "next": "14.2.5",
-    "next-sanity": "^9.4.2",
+    "next-sanity": "^12.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.71.1",
     "react-icons": "^5.2.1",
     "react-simple-typewriter": "^5.0.1",
     "react-social-icons": "^6.16.0",
     "react-tooltip": "^5.27.1",
-    "sanity": "^3.52.2",
-    "styled-components": "^6.1.12"
+    "sanity": "^4.22.0",
+    "styled-components": "^6.3.8"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "postcss": "^8",
+    "react-text-transition": "^3.1.0",
+    "tailwind-scrollbar": "^4.0.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
