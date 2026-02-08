@@ -4,10 +4,14 @@ import BackgroundCircles from './BackgroundCircles';
 import Image from 'next/image';
 import myProfile from '@/images/myProfile.webp';
 import Link from 'next/link';
+import { PageInfo } from '@/typings';
+import { urlFor } from '@/sanity';
 
-type Props = {};
+type Props = {
+    pageInfo: PageInfo | null;
+};
 
-export default function Hero({}: Props) {
+export default function Hero({ pageInfo }: Props) {
   const TEXTS = [
     "Create Amazing Apps",
     "Build Intuitive UI",
@@ -51,14 +55,18 @@ export default function Hero({}: Props) {
   return (
     <div ref={heroRef} className='h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden'>
       <BackgroundCircles />
-      <Image 
-        className="relative rounded-full h-32 w-32 mx-auto object-cover" 
-        src={myProfile} 
-        alt="myProfile" 
-      />
+      {pageInfo?.heroImage && (
+        <Image 
+          className="relative rounded-full mx-auto object-cover" 
+          src={urlFor(pageInfo.heroImage).url()} 
+          alt="myProfile"
+          width={128}
+          height={128}
+        />
+      )}
       <div className="z-20">
         <h2 className="text-sm uppercase text-[#6b7b8a] pb-2 tracking-[12px] font-bold">
-          Full Stack Developer
+          {pageInfo?.role}
         </h2>
         <h1 className="text-5xl lg:text-6xl font-semibold px-20">
           <span className="mr-3">

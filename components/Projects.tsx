@@ -1,11 +1,13 @@
-import { motion } from 'framer-motion';
 import React from 'react'
+import { Project } from '@/typings';
+import { motion } from 'framer-motion';
+import { urlFor } from '@/sanity';
 
-type Props = {}
+type Props = {
+    projects: Project[];
+}
 
-export default function Projects({}: Props) {
-    const projects = [1, 2, 3, 4, 5];
-
+export default function Projects({ projects }: Props) {
   return (
     <motion.div
         initial={{ opacity: 0 }}
@@ -21,13 +23,14 @@ export default function Projects({}: Props) {
             {projects.map((project, i) => (
                 <div className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen">
                     <motion.img
+                        className="w-2/4 h-2/4 object-contain"
                         initial={{ 
                             opacity: 0,
                             y: -300
                         }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.2 }}
-                        src="https://res.cloudinary.com/dphpfdsk3/image/upload/v1763744726/establecimientos/treehaus/treehaus-logo.png" 
+                        src={urlFor(project.image).url()}
                         alt=""
                     />
                     <div className="space-y-10 px-0 md:px-10 max-w-6xl">
@@ -35,10 +38,21 @@ export default function Projects({}: Props) {
                            <span className="underline decoration-[#A4805B]/50">
                                 Case Study {i + 1} of {projects.length}:
                            </span> {" "}
-                           WeOut App
+                           {project?.title}
                         </h4>
+
+                        <div className="flex items-center justify-center space-x-5">
+                            {project?.technologies.map((tecnology) => (
+                                <img 
+                                    className="h-10 w-10 object-contain"
+                                    key={tecnology._id} 
+                                    src={urlFor(tecnology.image).url()} alt="" 
+                                />
+                            ))}
+                        </div>
+
                         <p className="text-lg text-center md:text-left">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque cupiditate, deserunt dignissimos labore enim numquam quis minima voluptatum accusamus exercitationem sit ab corporis, odit totam perferendis? Eum ut nesciunt nam.
+                            {project?.summary}
                         </p>
                     </div>
                 </div>        
