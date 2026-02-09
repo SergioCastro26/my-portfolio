@@ -18,27 +18,27 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
   };
 
   return (
-    <div className="w-screen flex-shrink-0 snap-center flex flex-col items-center justify-center p-6 md:p-16 h-auto">
+    <div className="w-[90vw] sm:w-[85vw] md:w-screen flex-shrink-0 snap-center flex flex-col items-center justify-center p-4 sm:p-6 md:p-16 h-auto mx-auto">
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
-        className="spotlight-card p-6 md:p-10 max-w-3xl w-full"
+        className="spotlight-card p-4 sm:p-6 md:p-10 max-w-3xl w-full"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
         <img
-          className="w-full max-h-[280px] object-contain rounded-xl mb-8"
+          className="w-full max-h-[180px] sm:max-h-[220px] md:max-h-[280px] object-contain rounded-lg sm:rounded-xl mb-4 sm:mb-6 md:mb-8"
           src={urlFor(project.image).url()}
           alt={project.title}
         />
-        <div className="space-y-5">
+        <div className="space-y-3 sm:space-y-5">
           <div className="text-center">
             <span className="text-zinc-500 text-sm font-medium tracking-wide">
               {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
             </span>
-            <h4 className="text-2xl md:text-3xl font-semibold mt-2 tracking-tighter">
+            <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mt-2 tracking-tighter">
               {project?.title}
             </h4>
           </div>
@@ -47,7 +47,7 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
             {project?.technologies.map((technology) => (
               <div 
                 key={technology._id}
-                className="h-9 w-9 rounded-lg bg-zinc-100 p-1.5 border border-zinc-700/50"
+                className="h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9 rounded-md sm:rounded-lg bg-zinc-100 p-1 sm:p-1.5 border border-zinc-700/50"
               >
                 <img 
                   className="w-full h-full object-contain"
@@ -58,9 +58,11 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
             ))}
           </div>
 
-          <p className="text-zinc-400 text-center leading-relaxed text-sm">
-            {project?.summary}
-          </p>
+          <div className="max-h-20 sm:max-h-24 md:max-h-none overflow-y-auto scrollbar-thin scrollbar-track-zinc-900 scrollbar-thumb-zinc-700">
+            <p className="text-zinc-400 text-center leading-relaxed text-xs sm:text-sm">
+              {project?.summary}
+            </p>
+          </div>
           
           {project?.linkToBuild && (
             <div className="flex justify-center pt-2">
@@ -87,7 +89,7 @@ export default function Projects({ projects }: Props) {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true, amount: 0.2 }}
-      className="relative min-h-screen flex flex-col items-center justify-center z-0 py-24"
+      className="relative min-h-screen flex flex-col items-center px-4 pt-28 sm:pt-32 pb-16 md:py-24 md:justify-center z-0"
     >
       {/* Title - same style as About */}
       <motion.h3 
@@ -95,7 +97,7 @@ export default function Projects({ projects }: Props) {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="absolute top-24 section-heading"
+        className="section-heading mb-4 md:mb-0 md:absolute md:top-24"
       >
         Projects
       </motion.h3>

@@ -34,16 +34,16 @@ function About({ pageInfo }: Props) {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-10 py-24"
+      className="relative min-h-screen flex flex-col items-center px-4 sm:px-6 md:px-10 pt-28 sm:pt-32 pb-16 md:py-24 md:justify-center"
     >
       <motion.h3 
         variants={itemVariants}
-        className="absolute top-24 section-heading"
+        className="section-heading mb-6 md:mb-0 md:absolute md:top-24"
       >
         About
       </motion.h3>
 
-      <div className="max-w-5xl w-full flex flex-col md:flex-row items-center gap-10 md:gap-16">
+      <div className="max-w-5xl w-full flex flex-col md:flex-row items-center gap-6 sm:gap-10 md:gap-16">
         {/* Image with glow effect */}
         <motion.div 
           variants={itemVariants}
@@ -55,7 +55,7 @@ function About({ pageInfo }: Props) {
             <img
               src={urlFor(pageInfo?.profilePicture).url()}
               alt={pageInfo?.name || "Profile"}
-              className="relative z-10 w-48 h-48 md:w-72 md:h-80 xl:w-80 xl:h-96 
+              className="relative z-10 w-36 h-36 sm:w-48 sm:h-48 md:w-72 md:h-80 xl:w-80 xl:h-96 
                 rounded-full md:rounded-2xl object-cover 
                 border border-zinc-800/50 shadow-2xl"
               style={{
@@ -74,29 +74,29 @@ function About({ pageInfo }: Props) {
           className="flex-1 text-center md:text-left space-y-6"
         >
           <div className="space-y-2">
-            <p className="text-accent text-sm font-medium tracking-widest uppercase">
+            <p className="text-accent text-xs sm:text-sm font-medium tracking-widest uppercase">
               Get to know me
             </p>
-            <h4 className="text-3xl md:text-4xl font-semibold tracking-tight">
+            <h4 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
               This is what I am
             </h4>
           </div>
           
-          <div className="glass-card p-6 md:p-8 rounded-2xl border border-zinc-800/50">
-            <p className="text-base md:text-lg leading-relaxed text-zinc-400">
+          <div className="glass-card p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-zinc-800/50 max-h-40 sm:max-h-48 md:max-h-none overflow-y-auto scrollbar-thin scrollbar-track-zinc-900 scrollbar-thumb-zinc-700">
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed text-zinc-400">
               {pageInfo?.backgroundInformation}
             </p>
           </div>
 
           {/* Stats or highlights - optional decorative element */}
-          <div className="flex justify-center md:justify-start gap-8 pt-4">
+          <div className="flex justify-center md:justify-start gap-6 sm:gap-8 pt-2 sm:pt-4">
             <div className="text-center">
-              <p className="text-2xl md:text-3xl font-bold text-accent">5+</p>
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold text-accent">5+</p>
               <p className="text-xs text-zinc-500 uppercase tracking-wider">Years Exp</p>
             </div>
             <div className="w-px bg-zinc-800" />
             <div className="text-center">
-              <p className="text-2xl md:text-3xl font-bold text-foreground">19+</p>
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">19+</p>
               <p className="text-xs text-zinc-500 uppercase tracking-wider">Technologies</p>
             </div>
           </div>

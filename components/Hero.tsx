@@ -74,7 +74,7 @@ export default function Hero({ pageInfo }: Props) {
   }, [isInView]);
 
   return (
-    <div ref={heroRef} className='h-screen flex flex-col items-center justify-center text-center overflow-hidden relative'>
+    <div ref={heroRef} className='h-screen flex flex-col items-center justify-center text-center overflow-hidden relative px-4'>
       <BackgroundCircles />
       
       {/* Hero image centered with circles */}
@@ -83,25 +83,25 @@ export default function Hero({ pageInfo }: Props) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-          className="absolute inset-0 flex items-center justify-center z-10 -translate-y-[120px]"
+          className="absolute inset-0 flex items-center justify-center z-10 -translate-y-32 sm:-translate-y-36 md:-translate-y-[100px] lg:-translate-y-[120px]"
         >
           <div className="relative">
             {/* Glow effect behind image */}
-            <div className="absolute inset-0 rounded-full bg-accent/20 blur-2xl scale-125 -translate-y-[140px]" />
+            <div className="absolute inset-0 rounded-full bg-accent/20 blur-2xl scale-125 -translate-y-32 sm:-translate-y-36 md:-translate-y-[100px] lg:-translate-y-[140px]" />
             <div className="relative">
               <Image 
-                className="rounded-full mx-auto object-cover border-2 border-zinc-700/50 shadow-2xl -translate-y-[140px]"
+                className="rounded-full mx-auto object-cover border-2 border-zinc-700/50 shadow-2xl -translate-y-32 sm:-translate-y-36 md:-translate-y-[100px] lg:-translate-y-[140px]"
                 src={urlFor(pageInfo.heroImage).url()}
                 alt={pageInfo?.name || "Profile"}
-                width={150}
-                height={150}
+                width={120}
+                height={120}
                 style={{
                   boxShadow: '0 0 40px rgba(251, 191, 36, 0.15), 0 0 80px rgba(251, 191, 36, 0.05)'
                 }}
               />
               {/* Subtle ring decoration */}
-              <div className="absolute -inset-2 rounded-full border border-zinc-700/30 -translate-y-[140px]" />
-              <div className="absolute -inset-4 rounded-full border border-zinc-800/20 -translate-y-[140px]" />
+              <div className="absolute -inset-2 rounded-full border border-zinc-700/30 -translate-y-32 sm:-translate-y-36 md:-translate-y-[100px] lg:-translate-y-[140px]" />
+              <div className="absolute -inset-4 rounded-full border border-zinc-800/20 -translate-y-32 sm:-translate-y-36 md:-translate-y-[100px] lg:-translate-y-[140px]" />
             </div>
           </div>
         </motion.div>
@@ -111,14 +111,14 @@ export default function Hero({ pageInfo }: Props) {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="z-20 flex flex-col items-center mt-[100px]"
+        className="z-20 flex flex-col items-center mt-24 sm:mt-28 md:mt-24 lg:mt-[100px]"
       >
         
         <motion.div variants={itemVariants} className="space-y-4">
-          <h2 className="text-xs uppercase text-zinc-500 tracking-[6px] font-medium">
+          <h2 className="text-[10px] sm:text-xs uppercase text-zinc-500 tracking-[4px] sm:tracking-[6px] font-medium">
             {pageInfo?.role}
           </h2>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold px-6 md:px-20 tracking-tighter">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold px-2 sm:px-6 md:px-20 tracking-tighter">
             I love to{' '}
             <span className='text-accent'>
               {isInView && (

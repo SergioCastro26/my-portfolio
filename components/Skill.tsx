@@ -27,11 +27,11 @@ function Skill({ skill, directionLeft }: Props) {
           viewport={{ once: true }}
           src={urlFor(skill.image).url()}
           alt={skill.title}
-          className="rounded-full border border-zinc-800 object-cover w-24 h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 filter group-hover:grayscale transition duration-300 ease-in-out bg-zinc-100 p-0.5"
+          className="rounded-full border border-zinc-800 object-cover w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 filter group-hover:grayscale transition duration-300 ease-in-out bg-zinc-100 p-0.5"
         />
-        <div className="absolute opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out group-hover:bg-accent h-24 w-24 md:w-28 md:h-28 xl:w-32 xl:h-32 rounded-full z-0">
+        <div className="absolute opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out group-hover:bg-accent h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 xl:w-28 xl:h-28 rounded-full z-0">
             <div className="flex items-center justify-center h-full">
-                <p className="text-3xl font-bold text-white opacity-100">
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white opacity-100">
                     {skill.progress}%
                 </p>
             </div>

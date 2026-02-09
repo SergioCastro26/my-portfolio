@@ -39,20 +39,20 @@
 
 @layer components {
   .heroButton {
-    @apply px-6 py-2.5 border border-zinc-800 rounded-full uppercase text-xs tracking-widest font-medium
+    @apply px-4 sm:px-6 py-2 sm:py-2.5 border border-zinc-800 rounded-full uppercase text-[10px] sm:text-xs tracking-wider sm:tracking-widest font-medium
     text-zinc-400 transition-all duration-300
     hover:border-accent/60 hover:text-accent hover:shadow-glow-sm;
   }
 
   .contactInput {
-    @apply outline-none bg-zinc-900/50 backdrop-blur-md rounded-lg border px-6 py-4 border-zinc-800 
-    text-zinc-100 placeholder-zinc-500 transition-all duration-300
+    @apply outline-none bg-zinc-900/50 backdrop-blur-md rounded-lg border px-4 sm:px-6 py-3 sm:py-4 border-zinc-800 
+    text-sm sm:text-base text-zinc-100 placeholder-zinc-500 transition-all duration-300
     focus:border-accent/60 focus:ring-1 focus:ring-accent/20
     hover:border-zinc-700;
   }
 
   .section-heading {
-    @apply uppercase tracking-[20px] text-zinc-500 text-xl font-medium;
+    @apply uppercase tracking-[10px] sm:tracking-[15px] md:tracking-[20px] text-zinc-500 text-sm sm:text-base md:text-xl font-medium;
   }
 
   .glass-card {
