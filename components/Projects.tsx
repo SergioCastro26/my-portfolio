@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Project } from '@/typings';
 import { motion } from 'framer-motion';
 import { urlFor } from '@/sanity';
@@ -7,59 +7,131 @@ type Props = {
     projects: Project[];
 }
 
+function ProjectCard({ project, index, total }: { project: Project; index: number; total: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    cardRef.current.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    cardRef.current.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+  };
+
+  return (
+    <div className="w-screen flex-shrink-0 snap-center flex flex-col items-center justify-center p-6 md:p-16 h-auto">
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        className="spotlight-card p-6 md:p-10 max-w-3xl w-full"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <img
+          className="w-full max-h-[280px] object-contain rounded-xl mb-8"
+          src={urlFor(project.image).url()}
+          alt={project.title}
+        />
+        <div className="space-y-5">
+          <div className="text-center">
+            <span className="text-zinc-500 text-sm font-medium tracking-wide">
+              {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+            </span>
+            <h4 className="text-2xl md:text-3xl font-semibold mt-2 tracking-tighter">
+              {project?.title}
+            </h4>
+          </div>
+
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            {project?.technologies.map((technology) => (
+              <div 
+                key={technology._id}
+                className="h-9 w-9 rounded-lg bg-zinc-100 p-1.5 border border-zinc-700/50"
+              >
+                <img 
+                  className="w-full h-full object-contain"
+                  src={urlFor(technology.image).url()} 
+                  alt={technology.title} 
+                />
+              </div>
+            ))}
+          </div>
+
+          <p className="text-zinc-400 text-center leading-relaxed text-sm">
+            {project?.summary}
+          </p>
+          
+          {project?.linkToBuild && (
+            <div className="flex justify-center pt-2">
+              <a 
+                href={project.linkToBuild}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-sm"
+              >
+                View Project →
+              </a>
+            </div>
+          )}
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function Projects({ projects }: Props) {
   return (
     <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative min-h-screen flex flex-col items-center justify-center z-0 py-24"
+    >
+      {/* Title - same style as About */}
+      <motion.h3 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="absolute top-24 section-heading"
+      >
+        Projects
+      </motion.h3>
+
+      <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 scrollbar-thin scrollbar-track-zinc-900 scrollbar-thumb-zinc-700 pb-8 mt-8">
+        {projects.map((project, i) => (
+          <ProjectCard 
+            key={project._id} 
+            project={project} 
+            index={i} 
+            total={projects.length} 
+          />
+        ))}
+      </div>
+
+      {/* Scroll indicator */}
+      <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        className="h-screen relative flex overflow-hidden flex-col text-left md:flex-row max-w-full justify-evenly mx-auto items-center z-0"
-    >
-        <h3 className="absolute top-24 uppercase tracking-[20px] text-[#6b7b8a] text-2xl font-bold">
-            Projects
-        </h3>
-
-        <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#A4805B]/80">
-            {projects.map((project, i) => (
-                <div className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen">
-                    <motion.img
-                        className="w-2/4 h-2/4 object-contain"
-                        initial={{ 
-                            opacity: 0,
-                            y: -300
-                        }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.2 }}
-                        src={urlFor(project.image).url()}
-                        alt=""
-                    />
-                    <div className="space-y-10 px-0 md:px-10 max-w-6xl">
-                        <h4 className="text-4xl font-semibold text-center">
-                           <span className="underline decoration-[#A4805B]/50">
-                                Case Study {i + 1} of {projects.length}:
-                           </span> {" "}
-                           {project?.title}
-                        </h4>
-
-                        <div className="flex items-center justify-center space-x-5">
-                            {project?.technologies.map((tecnology) => (
-                                <img 
-                                    className="h-10 w-10 object-contain"
-                                    key={tecnology._id} 
-                                    src={urlFor(tecnology.image).url()} alt="" 
-                                />
-                            ))}
-                        </div>
-
-                        <p className="text-lg text-center md:text-left">
-                            {project?.summary}
-                        </p>
-                    </div>
-                </div>        
-            ))}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        viewport={{ once: true }}
+        className="flex justify-center mt-4 gap-2"
+      >
+        <div className="flex items-center gap-2 text-zinc-600 text-xs">
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+          </svg>
+          <span className="tracking-wider uppercase">Swipe to explore</span>
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
         </div>
+      </motion.div>
 
-        <div className="w-full absolute top-[30%] bg-[#A4805B]/10 left-0 h-[500px] -skew-y-12"></div>
+      {/* Background decoration */}
+      <div className="w-full absolute top-[30%] bg-accent/[0.02] left-0 h-[500px] -skew-y-12 pointer-events-none" />
     </motion.div>
   )
 }

@@ -30,7 +30,7 @@ export default function Header({ socials }: Props) {
           <SocialIcon
             key={social._id}
             url={social.url}
-            fgColor="#fe6f61"
+            fgColor="#fbbf24"
             bgColor="transparent"
           />
         ))}
@@ -54,18 +54,18 @@ export default function Header({ socials }: Props) {
           {/* <SocialIcon
             className="cursor-pointer"
             network="email"
-            fgColor="#fe6f61"
+            fgColor="#fbbf24"
             bgColor="transparent"
           /> */}
           <div className="mr-2">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-[#fe6f61]">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#fe6f61"></path> </g>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-accent">
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                <g id="SVGRepo_iconCarrier"> <path fillRule="evenodd" clipRule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="currentColor"></path> </g>
             </svg>
           </div>
 
-          <p className="uppercase hidden md:inline-flex text-sm text-[#fe6f61]">
+          <p className="uppercase hidden md:inline-flex text-sm text-accent">
             Get In Touch
           </p>
         </motion.div>

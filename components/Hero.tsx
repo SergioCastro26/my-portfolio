@@ -2,13 +2,34 @@ import React, { useState, useEffect, useRef } from 'react';
 import TextTransition, { presets } from 'react-text-transition';
 import BackgroundCircles from './BackgroundCircles';
 import Image from 'next/image';
-import myProfile from '@/images/myProfile.webp';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { PageInfo } from '@/typings';
 import { urlFor } from '@/sanity';
+import MagneticButton from './MagneticButton';
 
 type Props = {
     pageInfo: PageInfo | null;
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }
+  }
 };
 
 export default function Hero({ pageInfo }: Props) {
@@ -46,56 +67,84 @@ export default function Hero({ pageInfo }: Props) {
     if (isInView) {
       const intervalId = setInterval(() => {
         setIndex((prevIndex) => prevIndex + 1);
-      }, 1500); // Cambia cada 3 segundos
+      }, 2500);
 
-      return () => clearInterval(intervalId); // Limpieza del intervalo
+      return () => clearInterval(intervalId);
     }
   }, [isInView]);
 
   return (
-    <div ref={heroRef} className='h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden'>
+    <div ref={heroRef} className='h-screen flex flex-col items-center justify-center text-center overflow-hidden relative'>
       <BackgroundCircles />
+      
+      {/* Hero image centered with circles */}
       {pageInfo?.heroImage && (
-        <Image 
-          className="relative rounded-full mx-auto object-cover" 
-          src={urlFor(pageInfo.heroImage).url()} 
-          alt="myProfile"
-          width={128}
-          height={128}
-        />
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          className="absolute inset-0 flex items-center justify-center z-10 -translate-y-[120px]"
+        >
+          <div className="relative">
+            {/* Glow effect behind image */}
+            <div className="absolute inset-0 rounded-full bg-accent/20 blur-2xl scale-125 -translate-y-[140px]" />
+            <div className="relative">
+              <Image 
+                className="rounded-full mx-auto object-cover border-2 border-zinc-700/50 shadow-2xl -translate-y-[140px]"
+                src={urlFor(pageInfo.heroImage).url()}
+                alt={pageInfo?.name || "Profile"}
+                width={150}
+                height={150}
+                style={{
+                  boxShadow: '0 0 40px rgba(251, 191, 36, 0.15), 0 0 80px rgba(251, 191, 36, 0.05)'
+                }}
+              />
+              {/* Subtle ring decoration */}
+              <div className="absolute -inset-2 rounded-full border border-zinc-700/30 -translate-y-[140px]" />
+              <div className="absolute -inset-4 rounded-full border border-zinc-800/20 -translate-y-[140px]" />
+            </div>
+          </div>
+        </motion.div>
       )}
-      <div className="z-20">
-        <h2 className="text-sm uppercase text-[#6b7b8a] pb-2 tracking-[12px] font-bold">
-          {pageInfo?.role}
-        </h2>
-        <h1 className="text-5xl lg:text-6xl font-semibold px-20">
-          <span className="mr-3">
-            I love to {' '}
-            <span className='text-[#fe6f61]'>
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="z-20 flex flex-col items-center mt-[100px]"
+      >
+        
+        <motion.div variants={itemVariants} className="space-y-4">
+          <h2 className="text-xs uppercase text-zinc-500 tracking-[6px] font-medium">
+            {pageInfo?.role}
+          </h2>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold px-6 md:px-20 tracking-tighter">
+            I love to{' '}
+            <span className='text-accent'>
               {isInView && (
-                <TextTransition springConfig={presets.wobbly} direction="up">
+                <TextTransition springConfig={presets.wobbly} direction="up" inline>
                   {TEXTS[index % TEXTS.length]}
                 </TextTransition>
               )}
             </span>
-          </span>
-        </h1>
+          </h1>
+        </motion.div>
 
-        <div className="pt-2">
+        <motion.div variants={itemVariants} className="pt-6 flex flex-wrap justify-center gap-3">
           <Link href="#about">
-            <button className="heroButton">About</button>
+            <MagneticButton className="heroButton">About</MagneticButton>
           </Link>
           <Link href="#experience">
-            <button className="heroButton">Experience</button>
+            <MagneticButton className="heroButton">Experience</MagneticButton>
           </Link>
           <Link href="#skills">
-            <button className="heroButton">Skills</button>
+            <MagneticButton className="heroButton">Skills</MagneticButton>
           </Link>
           <Link href="#projects">
-            <button className="heroButton">Projects</button>
+            <MagneticButton className="heroButton">Projects</MagneticButton>
           </Link>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

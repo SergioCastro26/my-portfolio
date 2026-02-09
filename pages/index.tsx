@@ -6,6 +6,7 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import ContactMe from "@/components/ContactMe";
 import WorkExperience from "@/components/WorkExperience";
+import ScrollProgress from "@/components/ScrollProgress";
 import Link from "next/link";
 import { GetStaticProps } from "next";
 import { Experience, PageInfo, Skill, Project, Social } from "@/typings";
@@ -25,10 +26,12 @@ type Props = {
 
 const Home = ({ pageInfo, experiences, skills, projects, socials }: Props) => {
   return (
-    <div className="bg-[#34495e] text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#A4805B]/80">
+    <div className="bg-background text-foreground h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scrollbar-thin scrollbar-track-zinc-900 scrollbar-thumb-zinc-700">
       <Head>
         <title>Sergio's Portfolio</title>
       </Head>
+
+      <ScrollProgress />
 
       {/* Header */}
       <Header socials={socials} />
